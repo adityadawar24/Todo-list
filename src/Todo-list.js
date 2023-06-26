@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './TodoList.css';
 import { FiEdit } from 'react-icons/fi';
 import { AiFillDelete } from 'react-icons/ai';
-import {MdAddCircle} from 'react-icons/md';
+import { MdAddCircle } from 'react-icons/md';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -73,45 +73,44 @@ const TodoList = () => {
 
   return (
     <div className='container'>
-      <h1>Todo-List</h1>
-      <input type="text"  value={inputValue}  onChange={(e) => setInputValue(e.target.value)}   />
-       
-       <div className='add'>
-      <button onClick={addTodo}><MdAddCircle/></button></div>
-      <li className='tl'>
-          <input type="checkbox" checked={selectAll} onChange={toggleSelectAll}/>
-            
+     
+      <div className='todo-list-container'>
+        <h1>Todo-List</h1>
+        <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+        <div className='add'>
+          <button onClick={addTodo}><MdAddCircle /></button>
+        </div>
+        <li className='tl'>
+          <input type="checkbox" checked={selectAll} onChange={toggleSelectAll} />
           <label htmlFor="selectAll">Select All</label>
         </li>
-      <ul className="todo-list">
-        
-        {todos.map((todo, index) => (
-          <li key={index} className={completedTasks.includes(index) ? 'completed' : ''}>
-            <input type="checkbox" checked={completedTasks.includes(index)} onChange={() => toggleTaskCompletion(index)}/>
-              
-            {index === editIndex ? (
-              <>
-                <input  type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)}/>
-               
-                <button onClick={() => saveEdit(index)}>Save</button>
-                <button onClick={cancelEditing}>Cancel</button>
-              </>
-            ) : (
-              <>
-                <span
-                  style={{
-                    textDecoration: completedTasks.includes(index) ? 'line-through' : 'none',
-                  }}
-                >
-                  {todo}
-                </span>
-                <button onClick={() => startEditing(index, todo)} className="edit-button"><FiEdit/></button>
-                <button onClick={() => removeTodo(index)}><AiFillDelete/></button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+        <ul className="todo-list">
+          {todos.map((todo, index) => (
+            <li key={index} className={completedTasks.includes(index) ? 'completed' : ''}>
+              <input type="checkbox" checked={completedTasks.includes(index)} onChange={() => toggleTaskCompletion(index)} />
+              {index === editIndex ? (
+                <>
+                  <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+                  <button onClick={() => saveEdit(index)}>Save</button>
+                  <button onClick={cancelEditing}>Cancel</button>
+                </>
+              ) : (
+                <>
+                  <span
+                    style={{
+                      textDecoration: completedTasks.includes(index) ? 'line-through' : 'none',
+                    }}
+                  >
+                    {todo}
+                  </span>
+                  <button onClick={() => startEditing(index, todo)} className="edit-button"><FiEdit /></button>
+                  <button onClick={() => removeTodo(index)}><AiFillDelete /></button>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
